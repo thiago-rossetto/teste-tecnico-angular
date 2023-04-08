@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-clientes',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaClientesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+  }
+
+  adicionarCliente() {
+    this.router.navigate(['adicionar-cliente'], { relativeTo: this.route });
+  }
+
+  alterarDadosCliente() {
+    this.router.navigate(['alterar-dados-cliente/1'], { relativeTo: this.route });
   }
 
 }

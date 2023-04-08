@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { ClientesRoutingModule } from './clientes-routing.module';
+import { FormularioClienteComponent } from './components/formulario-cliente/formulario-cliente.component';
 import { ListaClientesComponent } from './components/lista-clientes/lista-clientes.component';
 
 @NgModule({
@@ -9,6 +10,9 @@ import { ListaClientesComponent } from './components/lista-clientes/lista-client
     CommonModule,
     ClientesRoutingModule
   ],
-  declarations: [ListaClientesComponent]
+  declarations: [
+    ListaClientesComponent,
+    FormularioClienteComponent
+  ]
 })
 export class ClientesModule { }
