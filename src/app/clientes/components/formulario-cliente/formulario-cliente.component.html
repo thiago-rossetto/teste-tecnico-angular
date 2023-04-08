@@ -1,3 +1,48 @@
-<p>
-  formulario-cliente works!
-</p>
+<div class="container-fluid p-4">
+  <div class="card p-3">
+    <div class="card-body">
+      <!-- Titulo -->
+      <div class="row">
+        <div class="col-sm-12 col-12">
+          <h3>{{ idCliente ? 'Alterar dados cadastrais' : 'Adicionar novo cliente'  }}</h3>
+          <p class="small text-danger">Os campos com (*) são de preenchimento obrigatório</p>
+        </div>
+      </div>
+      <!-- /Titulo -->
+      <!-- Formulario -->
+      <form (ngSubmit)="salvar()">
+        <div class="row">
+          <div class="col-sm-8 col-12 mb-3">
+            <label for="nome" class="form-label"><span class="text-danger">*</span> Nome Cliente</label>
+            <input type="text" class="form-control" id="nome" placeholder="Nome cliente">
+          </div>   
+          <div class="col-sm-4 col-12 mb-3">
+            <label for="cpf" class="form-label"><span class="text-danger">*</span> CPF</label>
+            <input type="text" class="form-control" id="cpf" placeholder="000.000.000-00">
+          </div>      
+        </div>
+        <div class="row">
+          <div class="col-sm-4 col-12 mb-3">
+            <label for="nascimento" class="form-label"><span class="text-danger">*</span> Data de Nascimento</label>
+            <input type="text" class="form-control" id="nascimento" placeholder="00/00/0000">
+          </div>   
+          <div class="col-sm-4 col-12 mb-3">
+            <label for="renda" class="form-label"><span class="text-danger">*</span> Renda Mensal</label>
+            <input type="text" class="form-control" id="renda" placeholder="R$ 00,00">
+          </div>   
+          <div class="col-sm-4 col-12 mb-3">
+            <label for="email" class="form-label"><span class="text-danger">*</span> E-mail</label>
+            <input type="email" class="form-control" id="email" placeholder="nome@email.com">
+          </div>     
+        </div>
+        <div class="row">
+          <div class="col-12 text-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="voltar()">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </div>
+      </form>
+      <!-- Formulario -->
+    </div>
+  </div>
+</div>

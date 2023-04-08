@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario-cliente',
@@ -8,13 +8,22 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FormularioClienteComponent implements OnInit {
 
-  idUsuario: string | null;
+  idCliente: string | null;
 
   constructor(
-    private route: ActivatedRoute
-  ) { this.idUsuario = this.route.snapshot.paramMap.get('id'); }
+    private route: ActivatedRoute,
+    private router: Router
+  ) { this.idCliente = this.route.snapshot.paramMap.get('id'); }
 
   ngOnInit() {
+  }
+
+  salvar() {
+    this.voltar();
+  }
+
+  voltar() {
+    this.router.navigate(['../']);
   }
 
 }
