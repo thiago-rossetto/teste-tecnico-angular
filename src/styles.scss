@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+$primary: #2A2A5C;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+body {
+    background-color: $gray-200;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #2C384AF2;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+    color: #2C384AAE;
+} 
