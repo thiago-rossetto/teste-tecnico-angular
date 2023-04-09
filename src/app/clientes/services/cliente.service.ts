@@ -17,7 +17,7 @@ export class ClienteService {
     return this.http.get<any>(this.urlApi + '/clientes').pipe(first());
   }
 
-  listarClientePorId(idCliente: number) {
+  listarClientePorId(idCliente: string) {
     return this.http.get<any>(this.urlApi + `/clientes/${idCliente}`).pipe(first());
   }
 
@@ -29,7 +29,7 @@ export class ClienteService {
     return this.http.put<any>(this.urlApi + `/clientes/${cliente.id}`, cliente).pipe(first());
   }
 
-  excluirCliente(idCliente: number) {
+  excluirCliente(idCliente: string) {
     return this.http.delete<any>(this.urlApi + `/clientes/${idCliente}`).pipe(first());
   }
 

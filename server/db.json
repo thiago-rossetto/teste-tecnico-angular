@@ -1,13 +1,94 @@
 {
   "clientes": [
     {
-      "id": 1,
       "nome": "Fábio Benjamin Cauê Souza",
       "cpf": "77288912353",
       "data_nasc": "08/03/1947",
       "email": "fabio_benjamin_souza@directnet.com.br",
+      "renda_mes": "10000,00",
+      "data_cad": "2023-04-08T23:11:22.552Z",
+      "id": 1
+    },
+    {
+      "nome": "Cauã Henrique Julio Costa",
+      "cpf": "54530711846",
+      "data_nasc": "09/01/1975",
+      "email": "cauahenriquecosta@tanet.com.br",
+      "renda_mes": "7500,00",
+      "data_cad": "2023-04-08T23:13:35.686Z",
+      "id": 2
+    },
+    {
+      "nome": "Laís Rita Rosa Castro",
+      "cpf": "34161715358",
+      "data_nasc": "05/04/199",
+      "email": "lais-castro83@br.live.com",
+      "renda_mes": "23000,00",
+      "data_cad": "2023-04-08T23:14:39.706Z",
+      "id": 3
+    },
+    {
+      "nome": "Analu Yasmin Mariane Almeida",
+      "cpf": "02870382979",
+      "data_nasc": "04/01/1978",
+      "email": "analu.yasmin.almeida@dglnet.com.br",
+      "renda_mes": "8600,00",
+      "data_cad": "2023-04-08T23:15:26.897Z",
+      "id": 4
+    },
+    {
+      "nome": "Caleb Henry Arthur dos Santos",
+      "cpf": "90788082175",
+      "data_nasc": "05/04/1955",
+      "email": "caleb_dossantos@heindmec.com.br",
+      "renda_mes": "24000,00",
+      "data_cad": "2023-04-08T23:16:52.747Z",
+      "id": 5
+    },
+    {
+      "nome": "Eliane Giovana Cardoso",
+      "cpf": "98220946636",
+      "data_nasc": "09/04/1996",
+      "email": "eliane_giovana_cardoso@optovac.com.br",
+      "renda_mes": "3500,00",
+      "data_cad": "2023-04-08T23:17:50.817Z",
+      "id": 6
+    },
+    {
+      "nome": "Lívia Regina Rita Pinto",
+      "cpf": "61858111625",
+      "data_nasc": "15/01/2000",
+      "email": "livia.regina.pinto@deskprint.com.br",
       "renda_mes": "4500,00",
-      "data_cad": "2023-04-08T22:09:21.751Z"
+      "data_cad": "2023-04-08T23:18:48.132Z",
+      "id": 7
+    },
+    {
+      "nome": "Cauê Calebe Guilherme Martins",
+      "cpf": "32392784302",
+      "data_nasc": "03/04/1963",
+      "email": "caue_martins@baptistas.com.br",
+      "renda_mes": "18000,00",
+      "data_cad": "2023-04-08T23:19:42.690Z",
+      "id": 8
+    },
+    {
+      "nome": "Fábio Joaquim da Costa",
+      "cpf": "76565968608",
+      "data_nasc": "08/03/197",
+      "email": "fabio.joaquim.dacosta@achievecidadenova.com.br",
+      "renda_mes": "6000,00",
+      "data_cad": "2023-04-08T23:20:42.988Z",
+      "id": 9
+    },
+    {
+      "nome": "Ruan Carlos Luís Teixeira",
+      "cpf": "96570375067",
+      "data_nasc": "23/03/1962",
+      "email": "ruancarlosteixeira@cssmi.com.br",
+      "renda_mes": "36500,00",
+      "data_cad": "2023-04-08T23:21:48.647Z",
+      "id": 10
     }
   ]
 }
