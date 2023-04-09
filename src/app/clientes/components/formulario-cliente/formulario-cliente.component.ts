@@ -11,6 +11,7 @@ import { ClienteService } from '../../services/cliente.service';
   styleUrls: ['./formulario-cliente.component.css'],
 })
 export class FormularioClienteComponent implements OnInit {
+  novoCadastro: boolean = true;
   idCliente: number | null = null;
   cliente: Cliente | null = null;
   form: FormGroup = new FormGroup({
@@ -19,6 +20,8 @@ export class FormularioClienteComponent implements OnInit {
     data_nasc: new FormControl(''),
     email: new FormControl(''),
     renda_mes: new FormControl(''),
+    data_cad: new FormControl(''),
+    id: new FormControl(null)
   });
 
   constructor(
@@ -28,6 +31,7 @@ export class FormularioClienteComponent implements OnInit {
     private service: ClienteService
   ) {
     this.idCliente = Number(this.route.snapshot.paramMap.get('id'));
+    this.idCliente ? this.novoCadastro = false : null;
   }
 
   ngOnInit(): void {
@@ -48,14 +52,22 @@ export class FormularioClienteComponent implements OnInit {
       data_nasc: [!this.cliente ? null : this.cliente.data_nasc],
       email: [!this.cliente ? null : this.cliente.email],
       renda_mes: [!this.cliente ? null : this.cliente.renda_mes],
+      data_cad: [!this.cliente ? null : this.cliente.data_cad],
+      id: [!this.cliente ? null : this.cliente.id]
     });
   }
 
   salvar(): void {
-    this.form.value.data_cad = this.dataCadastro();
-    this.service.cadastrarCliente(this.form.value).subscribe(() => {
-      this.voltar();
-    });
+    if(this.novoCadastro) {
+      this.form.value.data_cad = this.dataCadastro();
+      this.service.cadastrarCliente(this.form.value).subscribe(() => {
+        this.voltar();
+      });
+    } else {
+      this.service.atualizarCliente(this.form.value).subscribe(() => {
+        this.voltar();
+      })
+    }
   }
 
   voltar(): void {
