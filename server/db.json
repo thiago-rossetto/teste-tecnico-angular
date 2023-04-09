@@ -1,0 +1,13 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "Fábio Benjamin Cauê Souza",
+      "cpf": "77288912353",
+      "data_nasc": "08/03/1947",
+      "email": "fabio_benjamin_souza@directnet.com.br",
+      "renda_mes": "4500,00",
+      "data_cad": "2023-04-08T22:09:21.751Z"
+    }
+  ]
+}
