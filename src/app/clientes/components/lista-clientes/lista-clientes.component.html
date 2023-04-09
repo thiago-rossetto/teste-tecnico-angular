@@ -52,12 +52,32 @@
             <td class="td-align">{{ cliente.email }}</td>
             <td class="td-align" class="text-center">
               <button type="button" class="btn btn-outline-primary btn-sm m-1" (click)="alterarDadosCliente()">Editar</button>
-              <button type="button" class="btn btn-outline-primary btn-sm m-1">Excluir</button>
+              <button type="button" class="btn btn-outline-primary btn-sm m-1" data-bs-toggle="modal" data-bs-target="#modalExclusao" (click)="idExclusao = cliente.id">Excluir</button>
             </td>
           </tr>
         </tbody>
       </table>
       <!-- /Tabela -->
+
+      <!-- Modal Exclusao-->
+      <div class="modal fade" id="modalExclusao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Cliente</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Deseja realmente prosseguir com a exclusão do cliente?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #closebutton>Cancelar</button>
+              <button type="button" class="btn btn-primary" (click)="excluirRegistroCliente()">Confirmar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Modal Exclusao-->
     </div>
   </div>
 </div>

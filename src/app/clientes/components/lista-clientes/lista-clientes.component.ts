@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { Cliente } from '../../models/cliente.model';
 import { ClienteService } from '../../services/cliente.service';
 
 @Component({
@@ -9,7 +11,9 @@ import { ClienteService } from '../../services/cliente.service';
 })
 export class ListaClientesComponent implements OnInit {
 
-  clientes: Array<any> = [];
+  @ViewChild('closebutton') closebutton: any;
+  clientes: Array<Cliente> = [];
+  idExclusao: number | null = null;
 
   constructor(
     private router: Router,
@@ -31,6 +35,17 @@ export class ListaClientesComponent implements OnInit {
 
   alterarDadosCliente() {
     this.router.navigate(['alterar-dados-cliente/1'], { relativeTo: this.route });
+  }
+
+  excluirRegistroCliente() {
+    if(this.idExclusao) {
+      this.service.excluirCliente(this.idExclusao).subscribe(
+        () => {
+          this.closebutton.nativeElement.click();
+          this.ngOnInit();
+        }
+      )
+    }
   }
 
 }
