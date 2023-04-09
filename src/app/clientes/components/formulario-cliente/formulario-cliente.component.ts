@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Cliente } from '../../models/cliente.model';
@@ -8,7 +8,7 @@ import { ClienteService } from '../../services/cliente.service';
 @Component({
   selector: 'app-formulario-cliente',
   templateUrl: './formulario-cliente.component.html',
-  styleUrls: ['./formulario-cliente.component.css'],
+  styleUrls: ['./formulario-cliente.component.scss'],
 })
 export class FormularioClienteComponent implements OnInit {
   novoCadastro: boolean = true;
@@ -23,6 +23,7 @@ export class FormularioClienteComponent implements OnInit {
     data_cad: new FormControl(''),
     id: new FormControl(null)
   });
+  enviado: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +33,10 @@ export class FormularioClienteComponent implements OnInit {
   ) {
     this.idCliente = Number(this.route.snapshot.paramMap.get('id'));
     this.idCliente ? this.novoCadastro = false : null;
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
   }
 
   ngOnInit(): void {
@@ -47,14 +52,49 @@ export class FormularioClienteComponent implements OnInit {
 
   carregarFormulario(): void {
     this.form = this.formBuilder.group({
-      nome: [!this.cliente ? null : this.cliente.nome],
-      cpf: [!this.cliente ? null : this.cliente.cpf],
-      data_nasc: [!this.cliente ? null : this.cliente.data_nasc],
-      email: [!this.cliente ? null : this.cliente.email],
-      renda_mes: [!this.cliente ? null : this.cliente.renda_mes],
+      nome: [
+        !this.cliente ? null : this.cliente.nome,
+        [
+          Validators.required
+        ]
+      ],
+      cpf: [
+        !this.cliente ? null : this.cliente.cpf,
+        [
+          Validators.required
+        ]
+      ],
+      data_nasc: [
+        !this.cliente ? null : this.cliente.data_nasc,
+        [
+          Validators.required
+        ]
+      ],
+      email: [
+        !this.cliente ? null : this.cliente.email,
+        [
+          Validators.required
+        ]
+      ],
+      renda_mes: [
+        !this.cliente ? null : this.cliente.renda_mes,
+        [
+          Validators.required
+        ]
+      ],
       data_cad: [!this.cliente ? null : this.cliente.data_cad],
       id: [!this.cliente ? null : this.cliente.id]
     });
+  }
+
+  enviar(): void {
+    this.enviado = true;
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.salvar();
   }
 
   salvar(): void {
