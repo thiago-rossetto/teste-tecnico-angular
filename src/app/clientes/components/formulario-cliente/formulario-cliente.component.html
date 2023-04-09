@@ -102,8 +102,10 @@
               ><span class="text-danger">*</span> Renda Mensal</label
             >
             <input
+              currencyMask 
+              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
               type="text"
-              class="form-control"
+              class="form-control text-start"
               id="renda"
               placeholder="R$ 1.000,00"
               formControlName="renda_mes"

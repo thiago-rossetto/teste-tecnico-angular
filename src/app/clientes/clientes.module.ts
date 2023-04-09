@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxCurrencyModule } from 'ngx-currency';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 import { ClientesRoutingModule } from './clientes-routing.module';
@@ -14,7 +15,8 @@ import { ListaClientesComponent } from './components/lista-clientes/lista-client
     ReactiveFormsModule,
     FormsModule,
     NgxMaskDirective, 
-    NgxMaskPipe
+    NgxMaskPipe,
+    NgxCurrencyModule
   ],
   declarations: [
     ListaClientesComponent,
