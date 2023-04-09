@@ -24,6 +24,7 @@ export class FormularioClienteComponent implements OnInit {
     id: new FormControl(null)
   });
   enviado: boolean = false;
+  dataAtual: string = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +34,8 @@ export class FormularioClienteComponent implements OnInit {
   ) {
     this.idCliente = Number(this.route.snapshot.paramMap.get('id'));
     this.idCliente ? this.novoCadastro = false : null;
+    this.dataAtual = this.carregarDataAtual();
+    this.dataAtual = this.dataAtual.split('T')[0];
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -99,7 +102,7 @@ export class FormularioClienteComponent implements OnInit {
 
   salvar(): void {
     if(this.novoCadastro) {
-      this.form.value.data_cad = this.dataCadastro();
+      this.form.value.data_cad = this.carregarDataAtual();
       this.service.cadastrarCliente(this.form.value).subscribe(() => {
         this.voltar();
       });
@@ -114,7 +117,7 @@ export class FormularioClienteComponent implements OnInit {
     this.router.navigate(['../']);
   }
 
-  dataCadastro(): string {
+  carregarDataAtual(): string {
     let dataAtual = new Date();
     let isoStringData = new Date(
       dataAtual.getTime() - dataAtual.getTimezoneOffset() * 60000

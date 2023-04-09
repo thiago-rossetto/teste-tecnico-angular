@@ -41,6 +41,7 @@
               ><span class="text-danger">*</span> CPF</label
             >
             <input 
+              mask="000.000.000-00"
               type="text"
               class="form-control"
               id="cpf"
@@ -52,18 +53,24 @@
               <div *ngIf="f['cpf'].errors['required']">
                 CPF é um campo obrigatório.
               </div>
+              <div *ngIf="f['cpf'].errors['mask']">
+                Entre com um CPF válido.
+              </div>
             </div>
           </div>
           <div class="col-sm-4 col-12 mb-3" *ngIf="!novoCadastro">
             <label for="cpf" class="form-label"
               ><span class="text-danger">*</span> CPF</label
             >
-            <input 
+            <input *ngIf="cliente"
               disabled
               type="text"
               class="form-control"
               id="cpf"
-              [value]="cliente?.cpf"
+              [(ngModel)]="cliente.cpf" 
+              #cpf="ngModel"
+              [ngModelOptions]="{standalone: true}"
+              mask="000.000.000-00"
             />
           </div>
         </div>
@@ -73,16 +80,20 @@
               ><span class="text-danger">*</span> Data de Nascimento</label
             >
             <input
-              type="text"
+              type="date"
               class="form-control"
               id="nascimento"
               placeholder="00/00/0000"
               formControlName="data_nasc"
+              [max]="dataAtual"
               [ngClass]="{ 'is-invalid': enviado && f['data_nasc'].errors }"
             />
             <div *ngIf="enviado && f['data_nasc'].errors" class="invalid-feedback">
               <div *ngIf="f['data_nasc'].errors['required']">
                 Data de nascimento é um campo obrigatório.
+              </div>
+              <div *ngIf="f['data_nasc'].errors['pattern']">
+                Entre com uma data válida.
               </div>
             </div>
           </div>
@@ -94,7 +105,7 @@
               type="text"
               class="form-control"
               id="renda"
-              placeholder="R$ 00,00"
+              placeholder="R$ 1.000,00"
               formControlName="renda_mes"
               [ngClass]="{ 'is-invalid': enviado && f['renda_mes'].errors }"
             />
