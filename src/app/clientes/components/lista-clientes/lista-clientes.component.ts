@@ -33,8 +33,8 @@ export class ListaClientesComponent implements OnInit {
     this.router.navigate(['adicionar-cliente'], { relativeTo: this.route });
   }
 
-  alterarDadosCliente() {
-    this.router.navigate(['alterar-dados-cliente/1'], { relativeTo: this.route });
+  alterarDadosCliente(id: number) {
+    this.router.navigate(['alterar-dados-cliente/' + id], { relativeTo: this.route });
   }
 
   excluirRegistroCliente() {
