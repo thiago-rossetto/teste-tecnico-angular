@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Cliente } from '../../models/cliente.model';
 import { ClienteService } from '../../services/cliente.service';
 
 @Component({
@@ -10,8 +11,8 @@ import { ClienteService } from '../../services/cliente.service';
   styleUrls: ['./formulario-cliente.component.css'],
 })
 export class FormularioClienteComponent implements OnInit {
-  idCliente: string | null;
-  cliente: any;
+  idCliente: number | null = null;
+  cliente: Cliente | null = null;
   form: FormGroup = new FormGroup({
     nome: new FormControl(''),
     cpf: new FormControl(''),
@@ -26,7 +27,7 @@ export class FormularioClienteComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: ClienteService
   ) {
-    this.idCliente = this.route.snapshot.paramMap.get('id');
+    this.idCliente = Number(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {

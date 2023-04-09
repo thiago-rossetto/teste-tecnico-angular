@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { first } from 'rxjs/operators';
 
+import { Cliente } from '../models/cliente.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,23 +16,23 @@ export class ClienteService {
   ) { }
 
   listarClientes() {
-    return this.http.get<any>(this.urlApi + '/clientes').pipe(first());
+    return this.http.get<Cliente[]>(this.urlApi + '/clientes').pipe(first());
   }
 
-  listarClientePorId(idCliente: string) {
-    return this.http.get<any>(this.urlApi + `/clientes/${idCliente}`).pipe(first());
+  listarClientePorId(idCliente: number) {
+    return this.http.get<Cliente>(this.urlApi + `/clientes/${idCliente}`).pipe(first());
   }
 
-  cadastrarCliente(cliente: any) {
-    return this.http.post<any>(this.urlApi + '/clientes', cliente).pipe(first());
+  cadastrarCliente(cliente: Cliente) {
+    return this.http.post<Cliente>(this.urlApi + '/clientes', cliente).pipe(first());
   }
 
-  atualizarCliente(cliente: any) {
-    return this.http.put<any>(this.urlApi + `/clientes/${cliente.id}`, cliente).pipe(first());
+  atualizarCliente(cliente: Cliente) {
+    return this.http.put<Cliente>(this.urlApi + `/clientes/${cliente.id}`, cliente).pipe(first());
   }
 
-  excluirCliente(idCliente: string) {
-    return this.http.delete<any>(this.urlApi + `/clientes/${idCliente}`).pipe(first());
+  excluirCliente(idCliente: number) {
+    return this.http.delete<Cliente>(this.urlApi + `/clientes/${idCliente}`).pipe(first());
   }
 
 }
