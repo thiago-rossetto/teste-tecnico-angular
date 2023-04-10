@@ -14,10 +14,12 @@ export class ListaClientesComponent implements OnInit {
 
   @ViewChild('closebutton') closebutton: any;
   clientes: Array<Cliente | any> = [];
-  clientesFiltrados: Array<Cliente | any> = [];
+  clientesLista: Array<Cliente | any> = [];
   idExclusao: number | null = null;
   query: any = "";
   tipoFiltro: string | null = null;
+  totalDePaginas: number | null = null;
+  pagina: number = 1;
 
   constructor(
     private router: Router,
@@ -29,8 +31,9 @@ export class ListaClientesComponent implements OnInit {
     this.service.listarClientes().subscribe(
       (res) => {
         this.clientes = res;
-        this.clientesFiltrados = res;
+        this.clientesLista = res;
         this.ordenarLista('nome');
+        this.paginacao();
       }
     )
   }
@@ -47,6 +50,17 @@ export class ListaClientesComponent implements OnInit {
     });
   }
 
+  paginacao() {
+    const totalItens = this.clientes.length;
+    this.totalDePaginas = Math.ceil( totalItens / 5 );
+    this.carregarPagina(1);
+  }
+
+  carregarPagina(pagina: number) {
+    this.pagina = pagina;
+    this.clientes =  this.clientesLista.slice((pagina - 1) * 5, pagina * 5);
+  }
+
   aplicarTipoPesquisa(tipo: any): void {
     this.tipoFiltro = tipo;
     this.query = "";
@@ -54,19 +68,19 @@ export class ListaClientesComponent implements OnInit {
 
   filtroPesquisa(): void { 
     if (this.tipoFiltro == "nome") {
-      this.clientes = this.clientesFiltrados.filter(
+      this.clientes = this.clientesLista.filter(
         (a) => a.nome == this.query
       );
     }
     else if(this.tipoFiltro == "cpf") {
       this.query = this.query.match(/\d/g)!.join("");
-      this.clientes = this.clientesFiltrados.filter(
+      this.clientes = this.clientesLista.filter(
         (a) => a.cpf == this.query
       );
     }
     else if(this.tipoFiltro == "data_nasc") {
       const query = this.formatarDataPesquisa(this.query);
-      this.clientes = this.clientesFiltrados.filter(
+      this.clientes = this.clientesLista.filter(
         (a) => a.data_nasc == query
       );
     }
