@@ -13,8 +13,8 @@ import { ClienteService } from '../../services/cliente.service';
 export class ListaClientesComponent implements OnInit {
 
   @ViewChild('closebutton') closebutton: any;
-  clientes: Array<Cliente> = [];
-  clientesFiltrados: Array<Cliente> = [];
+  clientes: Array<Cliente | any> = [];
+  clientesFiltrados: Array<Cliente | any> = [];
   idExclusao: number | null = null;
   query: any = "";
   tipoFiltro: string | null = null;
@@ -25,22 +25,34 @@ export class ListaClientesComponent implements OnInit {
     private service: ClienteService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.service.listarClientes().subscribe(
       (res) => {
         this.clientes = res;
         this.clientesFiltrados = res;
+        this.ordenarLista('nome');
       }
     )
   }
 
-  aplicarTipoPesquisa(tipo: any) {
-    this.tipoFiltro = tipo.target.value;
-    this.query = "";
-    this.ngOnInit();
+  ordenarLista(propriedade: string): void {
+    this.clientes.sort(function (a, b) {
+      if (a[propriedade] < b[propriedade]) {
+        return -1;
+      }
+      if (a[propriedade] > b[propriedade]) {
+        return 1;
+      }
+      return 0;
+    });
   }
 
-  filtroPesquisa() { 
+  aplicarTipoPesquisa(tipo: any): void {
+    this.tipoFiltro = tipo;
+    this.query = "";
+  }
+
+  filtroPesquisa(): void { 
     if (this.tipoFiltro == "nome") {
       this.clientes = this.clientesFiltrados.filter(
         (a) => a.nome == this.query
@@ -60,7 +72,7 @@ export class ListaClientesComponent implements OnInit {
     }
   }
 
-  formatarDataPesquisa(data: string) {
+  formatarDataPesquisa(data: string): string {
     var dia  = data.split("/")[0];
     var mes  = data.split("/")[1];
     var ano  = data.split("/")[2];
@@ -68,15 +80,15 @@ export class ListaClientesComponent implements OnInit {
     return ano + '-' + ("0"+mes).slice(-2) + '-' + ("0"+dia).slice(-2);
   }
 
-  adicionarCliente() {
+  adicionarCliente(): void {
     this.router.navigate(['adicionar-cliente'], { relativeTo: this.route });
   }
 
-  alterarDadosCliente(id: number) {
+  alterarDadosCliente(id: number): void {
     this.router.navigate(['alterar-dados-cliente/' + id], { relativeTo: this.route });
   }
 
-  excluirRegistroCliente() {
+  excluirRegistroCliente(): void {
     if(this.idExclusao) {
       this.service.excluirCliente(this.idExclusao).subscribe(
         () => {

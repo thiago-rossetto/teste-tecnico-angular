@@ -23,19 +23,20 @@
         <div class="col-auto me-3">
           <div class="input-group mb-3">
             <span class="input-group-text bg-light" id="basic-addon1">Ordenar por:</span>          
-            <select class="form-select" id="autoSizingSelect">
-              <option selected>Nome</option>
-              <option value="1">Data Nascimento</option>
-              <option value="2">Renda Mensal</option>
+            <select #ordenacao class="form-select" id="autoSizingSelect" (change)="ordenarLista(ordenacao.value)">
+              <option selected value="nome">Nome</option>
+              <option value="data_nasc">Data Nascimento</option>
+              <option value="renda_mes">Renda Mensal</option>
             </select>
           </div>
         </div>
         <div class="col-auto">
           <div class="input-group">
             <select
+              #tipo
               class="form-select bg-light"
               aria-label="Default select example"
-              (change)="aplicarTipoPesquisa($event)"
+              (change)="aplicarTipoPesquisa(tipo.value)"
             >
               <option selected>Pesquisar por:</option>
               <option value="nome">Nome</option>
