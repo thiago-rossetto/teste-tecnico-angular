@@ -103,15 +103,6 @@
       </table>
       <!-- /Tabela -->
       <!-- Paginacao -->
-      <!-- <ul class="pagination justify-content-center">
-        <li class="page-item" [disabled]="pagina === 1">
-          <a class="page-link" type="button" (click)="carregarPagina(pagina - 1)">Anterior</a>
-        </li>    
-        <li class="page-item" disabled><a class="page-link bg-light">Pagina {{pagina}} de {{totalDePaginas}}</a></li>
-        <li class="page-item" [disabled]="pagina === totalDePaginas">
-          <a class="page-link" type="button" (click)="carregarPagina(pagina + 1)">Próxima</a>
-        </li>    
-      </ul> -->
       <div class="col-auto text-center pt-2">
         <div class="btn-group" role="group" aria-label="paginacao">
           <button type="button" class="btn btn-outline-primary" [disabled]="pagina === 1" (click)="carregarPagina(pagina - 1)">Anterior</button>
@@ -120,7 +111,6 @@
         </div>
       </div>
       <!-- /Paginacao -->
-
       <!-- Modal Exclusao-->
       <div
         class="modal fade"

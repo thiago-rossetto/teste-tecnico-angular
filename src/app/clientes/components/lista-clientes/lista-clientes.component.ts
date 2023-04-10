@@ -33,12 +33,12 @@ export class ListaClientesComponent implements OnInit {
         this.clientes = res;
         this.clientesLista = res;
         this.ordenarLista('nome');
-        this.paginacao();
       }
     )
   }
 
   ordenarLista(propriedade: string): void {
+    this.clientes = this.clientesLista;
     this.clientes.sort(function (a, b) {
       if (a[propriedade] < b[propriedade]) {
         return -1;
@@ -48,12 +48,15 @@ export class ListaClientesComponent implements OnInit {
       }
       return 0;
     });
+
+    this.paginacao();
   }
 
   paginacao() {
     const totalItens = this.clientes.length;
     this.totalDePaginas = Math.ceil( totalItens / 5 );
-    this.carregarPagina(1);
+    this.pagina = 1;
+    this.carregarPagina(this.pagina);
   }
 
   carregarPagina(pagina: number) {
@@ -66,8 +69,12 @@ export class ListaClientesComponent implements OnInit {
     this.query = "";
   }
 
-  filtroPesquisa(): void { 
-    if (this.tipoFiltro == "nome") {
+  filtroPesquisa(): void {
+    if(this.query === "") {
+      this.clientes = this.clientesLista;
+      this.paginacao();
+    }
+    else if (this.tipoFiltro == "nome") {
       this.clientes = this.clientesLista.filter(
         (a) => a.nome == this.query
       );
@@ -83,7 +90,7 @@ export class ListaClientesComponent implements OnInit {
       this.clientes = this.clientesLista.filter(
         (a) => a.data_nasc == query
       );
-    }
+    } 
   }
 
   formatarDataPesquisa(data: string): string {
