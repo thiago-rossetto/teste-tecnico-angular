@@ -8,25 +8,50 @@
           <p class="small">Lista dos clientes cadastrados</p>
         </div>
         <div class="col-sm-4 col-12 text-end">
-          <button type="button" class="btn btn-primary" (click)="adicionarCliente()">Novo cliente</button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="adicionarCliente()"
+          >
+            Novo cliente
+          </button>
         </div>
       </div>
       <!-- /Titulo -->
       <!-- Ordenação e filtro -->
-      <form class="row g-2 float-end mb-3">
-        <div class="col-auto">
-          <label class="visually-hidden" for="autoSizingSelect">Ordenação</label>
-          <select class="form-select" id="autoSizingSelect">
-            <option selected>Nome</option>
-            <option value="1">Data Nascimento</option>
-            <option value="2">Renda Mensal</option>
-          </select>
+      <form class="row g-2 float-end mb-3">     
+        <div class="col-auto me-3">
+          <div class="input-group mb-3">
+            <span class="input-group-text bg-light" id="basic-addon1">Ordenar por:</span>          
+            <select class="form-select" id="autoSizingSelect">
+              <option selected>Nome</option>
+              <option value="1">Data Nascimento</option>
+              <option value="2">Renda Mensal</option>
+            </select>
+          </div>
         </div>
         <div class="col-auto">
-          <label class="visually-hidden" for="autoSizingInputGroup">Nome, CPF ou Renda Mensal</label>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Nome, CPF ou Renda" aria-label="Nome, CPF ou Renda" aria-describedby="button-addon2">
-            <button class="btn btn-outline-primary" type="button" id="button-addon2">Procurar</button>          
+            <select
+              class="form-select bg-light"
+              aria-label="Default select example"
+              (change)="aplicarTipoPesquisa($event)"
+            >
+              <option selected>Pesquisar por:</option>
+              <option value="nome">Nome</option>
+              <option value="cpf">CPF</option>
+              <option value="data_nasc">Data Nascimento</option>
+            </select>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Filtrar..."
+              aria-label="Nome, CPF ou Data"
+              aria-describedby="button-addon2"
+              name="filtro"
+              [(ngModel)]="query"
+              (keyup.enter)="filtroPesquisa()"
+            />
           </div>
         </div>
       </form>
@@ -46,13 +71,31 @@
         <tbody>
           <tr *ngFor="let cliente of clientes">
             <td class="td-align">{{ cliente.nome }}</td>
-            <td class="td-align">{{ cliente.cpf | mask: '000.000.000.-00' }}</td>
-            <td class="td-align">{{ cliente.data_nasc | date: 'dd/MM/yyyy' }}</td>
-            <td class="td-align">{{ cliente.renda_mes | currency:'BRL' }}</td>
+            <td class="td-align">
+              {{ cliente.cpf | mask : "000.000.000.-00" }}
+            </td>
+            <td class="td-align">
+              {{ cliente.data_nasc | date : "dd/MM/yyyy" }}
+            </td>
+            <td class="td-align">{{ cliente.renda_mes | currency : "BRL" }}</td>
             <td class="td-align">{{ cliente.email }}</td>
             <td class="td-align" class="text-center">
-              <button type="button" class="btn btn-outline-primary btn-sm m-1" (click)="alterarDadosCliente(cliente.id)">Editar</button>
-              <button type="button" class="btn btn-outline-primary btn-sm m-1" data-bs-toggle="modal" data-bs-target="#modalExclusao" (click)="idExclusao = cliente.id">Excluir</button>
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm m-1"
+                (click)="alterarDadosCliente(cliente.id)"
+              >
+                Editar
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm m-1"
+                data-bs-toggle="modal"
+                data-bs-target="#modalExclusao"
+                (click)="idExclusao = cliente.id"
+              >
+                Excluir
+              </button>
             </td>
           </tr>
         </tbody>
@@ -60,19 +103,45 @@
       <!-- /Tabela -->
 
       <!-- Modal Exclusao-->
-      <div class="modal fade" id="modalExclusao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="modalExclusao"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Cliente</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Excluir Cliente
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="modal-body">
               Deseja realmente prosseguir com a exclusão do cliente?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #closebutton>Cancelar</button>
-              <button type="button" class="btn btn-primary" (click)="excluirRegistroCliente()">Confirmar</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                #closebutton
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="excluirRegistroCliente()"
+              >
+                Confirmar
+              </button>
             </div>
           </div>
         </div>
