@@ -17,7 +17,7 @@ export class ListaClientesComponent implements OnInit {
   clientesLista: Array<Cliente | any> = [];
   idExclusao: number | null = null;
   query: any = "";
-  tipoFiltro: string | null = null;
+  tipoFiltro: string | null = "nome";
   totalDePaginas: number | null = null;
   pagina: number = 1;
 
