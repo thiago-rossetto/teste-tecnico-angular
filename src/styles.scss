@@ -62,6 +62,11 @@ p {
 .input-element[type="text"]:disabled{
     background-color: #9E9E9E;
 }
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 1.1rem 2.25rem 0.375rem 0.75rem !important;
+}
 .label-element {
   position: absolute;
   font-size: 10px;

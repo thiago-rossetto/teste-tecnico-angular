@@ -18,10 +18,10 @@
     </div>
     <!-- /Titulo -->
     <!-- Ordenação e filtro -->
-    <form class="row g-2 float-end mb-3 me-3">     
+    <form class="row g-3 float-end mb-3 me-3">     
       <div class="col-auto me-3">
-        <div class="input-group mb-3">
-          <span class="input-group-text bg-light" id="basic-addon1">Ordenar por:</span>          
+        <div class="form-group mb-3">
+          <span class="label-element" id="basic-addon1">Ordenar por:</span>          
           <select #ordenacao class="form-select" id="autoSizingSelect" (change)="ordenarLista(ordenacao.value)">
             <option selected value="nome">Nome</option>
             <option value="data_nasc">Data Nascimento</option>
@@ -30,29 +30,31 @@
         </div>
       </div>
       <div class="col-auto">
-        <div class="input-group">
+        <div class="form-group">
+          <span class="label-element" id="basic-addon1">Pesquisar por:</span>  
           <select
             #tipo
-            class="form-select bg-light"
+            class="form-select"
             aria-label="Default select example"
             (change)="aplicarTipoPesquisa(tipo.value)"
           >
-            <option selected>Pesquisar por:</option>
             <option value="nome">Nome</option>
             <option value="cpf">CPF</option>
             <option value="data_nasc">Data Nascimento</option>
           </select>
-          <input
+        </div>
+      </div>
+      <div class="col-auto">
+        <span class="label-element" id="basic-addon1">Pesquisar:</span> 
+        <input
             type="text"
-            class="form-control"
-            placeholder="Filtrar..."
+            class="input-element"
             aria-label="Nome, CPF ou Data"
             aria-describedby="button-addon2"
             name="filtro"
             [(ngModel)]="query"
             (keyup.enter)="filtroPesquisa()"
           />
-        </div>
       </div>
     </form>
     <!-- /Ordenação e filtro -->
