@@ -4,7 +4,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1º Passo (Rodar projeto): 
+- Abrir um novo terminal e rodar o comando: `ng serve`.
+
+2º Passo (Rodar Mock):
+- Abrir um novo terminal e rodar o comando: `json-server --watch server/db.json`.
 
 ## Code scaffolding
 
