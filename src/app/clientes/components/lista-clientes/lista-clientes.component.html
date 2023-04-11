@@ -1,64 +1,64 @@
-<div class="container-fluid p-4">
-  <div class="card p-3">
-    <div class="card-body">
-      <!-- Titulo -->
-      <div class="row">
-        <div class="col-sm-8 col-12">
-          <h3>Clientes</h3>
-          <p class="small">Lista dos clientes cadastrados</p>
-        </div>
-        <div class="col-sm-4 col-12 text-end">
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="adicionarCliente()"
-          >
-            Novo cliente
-          </button>
+<div class="container-fluid p-5">
+  <div class="content">
+    <!-- Titulo -->
+    <div class="row">
+      <div class="col-sm-8 col-12">
+        <p class="title-page mb-0">Clientes</p>
+        <p class="sub-title-page">Lista de clientes cadastrados</p>
+      </div>
+      <div class="col-sm-4 col-12 text-end ml-20">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="adicionarCliente()"
+        >
+          Novo cliente
+        </button>
+      </div>
+    </div>
+    <!-- /Titulo -->
+    <!-- Ordenação e filtro -->
+    <form class="row g-2 float-end mb-3 me-3">     
+      <div class="col-auto me-3">
+        <div class="input-group mb-3">
+          <span class="input-group-text bg-light" id="basic-addon1">Ordenar por:</span>          
+          <select #ordenacao class="form-select" id="autoSizingSelect" (change)="ordenarLista(ordenacao.value)">
+            <option selected value="nome">Nome</option>
+            <option value="data_nasc">Data Nascimento</option>
+            <option value="renda_mes">Renda Mensal</option>
+          </select>
         </div>
       </div>
-      <!-- /Titulo -->
-      <!-- Ordenação e filtro -->
-      <form class="row g-2 float-end mb-3">     
-        <div class="col-auto me-3">
-          <div class="input-group mb-3">
-            <span class="input-group-text bg-light" id="basic-addon1">Ordenar por:</span>          
-            <select #ordenacao class="form-select" id="autoSizingSelect" (change)="ordenarLista(ordenacao.value)">
-              <option selected value="nome">Nome</option>
-              <option value="data_nasc">Data Nascimento</option>
-              <option value="renda_mes">Renda Mensal</option>
-            </select>
-          </div>
+      <div class="col-auto">
+        <div class="input-group">
+          <select
+            #tipo
+            class="form-select bg-light"
+            aria-label="Default select example"
+            (change)="aplicarTipoPesquisa(tipo.value)"
+          >
+            <option selected>Pesquisar por:</option>
+            <option value="nome">Nome</option>
+            <option value="cpf">CPF</option>
+            <option value="data_nasc">Data Nascimento</option>
+          </select>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Filtrar..."
+            aria-label="Nome, CPF ou Data"
+            aria-describedby="button-addon2"
+            name="filtro"
+            [(ngModel)]="query"
+            (keyup.enter)="filtroPesquisa()"
+          />
         </div>
-        <div class="col-auto">
-          <div class="input-group">
-            <select
-              #tipo
-              class="form-select bg-light"
-              aria-label="Default select example"
-              (change)="aplicarTipoPesquisa(tipo.value)"
-            >
-              <option selected>Pesquisar por:</option>
-              <option value="nome">Nome</option>
-              <option value="cpf">CPF</option>
-              <option value="data_nasc">Data Nascimento</option>
-            </select>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Filtrar..."
-              aria-label="Nome, CPF ou Data"
-              aria-describedby="button-addon2"
-              name="filtro"
-              [(ngModel)]="query"
-              (keyup.enter)="filtroPesquisa()"
-            />
-          </div>
-        </div>
-      </form>
-      <!-- /Ordenação e filtro -->
-      <!-- Tabela -->
-      <table class="table">
+      </div>
+    </form>
+    <!-- /Ordenação e filtro -->
+    <!-- Tabela -->
+    <div class="table-wrapper p-3">
+      <table class="fl-table">
         <thead>
           <tr>
             <th>Nome Cliente</th>
@@ -66,96 +66,96 @@
             <th>Data Nascimento</th>
             <th>Renda Mensal</th>
             <th>E-mail</th>
-            <th class="text-center" width="auto">Ações</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let cliente of clientes">
-            <td class="td-align">{{ cliente.nome }}</td>
-            <td class="td-align">
+            <td>{{ cliente.nome }}</td>
+            <td>
               {{ cliente.cpf | mask : "000.000.000.-00" }}
             </td>
-            <td class="td-align">
+            <td>
               {{ cliente.data_nasc | date : "dd/MM/yyyy" }}
             </td>
-            <td class="td-align">{{ cliente.renda_mes | currency : "BRL" }}</td>
-            <td class="td-align">{{ cliente.email }}</td>
-            <td class="td-align" class="text-center">
-              <button
+            <td>{{ cliente.renda_mes | currency : "BRL" }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>
+              <a
                 type="button"
-                class="btn btn-outline-primary btn-sm m-1"
+                class="m-1"
                 (click)="alterarDadosCliente(cliente.id)"
               >
                 Editar
-              </button>
-              <button
+              </a>
+              <a
                 type="button"
-                class="btn btn-outline-primary btn-sm m-1"
+                class="m-1"
                 data-bs-toggle="modal"
                 data-bs-target="#modalExclusao"
                 (click)="idExclusao = cliente.id"
               >
                 Excluir
-              </button>
+              </a>
             </td>
           </tr>
         </tbody>
       </table>
-      <!-- /Tabela -->
-      <!-- Paginacao -->
-      <div class="col-auto text-center pt-2">
-        <div class="btn-group" role="group" aria-label="paginacao">
-          <button type="button" class="btn btn-outline-primary" [disabled]="pagina === 1" (click)="carregarPagina(pagina - 1)">Anterior</button>
-          <button type="button" class="btn btn-outline-primary" disabled>Pagina {{pagina}} de {{totalDePaginas}}</button>
-          <button type="button" class="btn btn-outline-primary" [disabled]="pagina === totalDePaginas" (click)="carregarPagina(pagina + 1)">Próxima</button>
-        </div>
+    </div>
+    <!-- /Tabela -->
+    <!-- Paginacao -->
+    <div class="col-auto text-center pt-4">
+      <div class="btn-group" role="group" aria-label="paginacao">
+        <button type="button" class="btn btn-outline-primary" [disabled]="pagina === 1" (click)="carregarPagina(pagina - 1)">Anterior</button>
+        <button type="button" class="btn btn-outline-primary" disabled>Pagina {{pagina}} de {{totalDePaginas}}</button>
+        <button type="button" class="btn btn-outline-primary" [disabled]="pagina === totalDePaginas" (click)="carregarPagina(pagina + 1)">Próxima</button>
       </div>
-      <!-- /Paginacao -->
-      <!-- Modal Exclusao-->
-      <div
-        class="modal fade"
-        id="modalExclusao"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Excluir Cliente
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              Deseja realmente prosseguir com a exclusão do cliente?
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-                #closebutton
-              >
-                Cancelar
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                (click)="excluirRegistroCliente()"
-              >
-                Confirmar
-              </button>
-            </div>
+    </div>
+    <!-- /Paginacao -->
+    <!-- Modal Exclusao-->
+    <div
+      class="modal fade"
+      id="modalExclusao"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Excluir Cliente
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Deseja realmente prosseguir com a exclusão do cliente?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              #closebutton
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="excluirRegistroCliente()"
+            >
+              Confirmar
+            </button>
           </div>
         </div>
       </div>
-      <!-- /Modal Exclusao-->
     </div>
+    <!-- /Modal Exclusao-->
   </div>
 </div>

@@ -1,94 +1,90 @@
-<div class="container-fluid p-4">
-  <div class="card p-3">
-    <div class="card-body">
-      <!-- Titulo -->
-      <div class="row">
-        <div class="col-sm-12 col-12">
-          <h3>
-            {{
-              idCliente ? "Alterar dados cadastrais" : "Adicionar novo cliente"
-            }}
-          </h3>
-          <p class="small text-danger">
-            Os campos com (*) são de preenchimento obrigatório
-          </p>
-        </div>
+<div class="container-fluid p-5">
+  <div class="content">
+    <!-- Titulo -->
+    <div class="row">
+      <div class="col-sm-12 col-12">
+        <p class="title-page mb-0">
+          {{ idCliente ? "Alterar dados cadastrais" : "Adicionar novo cliente" }}
+        </p>
+        <p class="sub-title-page">
+          Os campos com <span class="text-danger">*</span> são de preenchimento obrigatório
+        </p>
       </div>
-      <!-- /Titulo -->
-      <!-- Formulario -->
+    </div>
+    <!-- /Titulo -->
+    <!-- Formulario -->
+    <div class="p-3">
       <form [formGroup]="form" (ngSubmit)="enviar()">
         <div class="row">
           <div class="col-sm-8 col-12 mb-3">
-            <label for="nome" class="form-label"
-              ><span class="text-danger">*</span> Nome Cliente</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="nome"
-              placeholder="Nome cliente"
-              formControlName="nome"
-              [ngClass]="{ 'is-invalid': enviado && f['nome'].errors }"
-            />
-            <div *ngIf="enviado && f['nome'].errors" class="invalid-feedback">
+            <div class="form-group">
+              <label class="label-element"
+                ><span class="text-danger">*</span> Nome:</label
+              >
+              <input
+                type="text"
+                class="input-element form-control"
+                id="nome"
+                formControlName="nome"
+                [ngClass]="{ 'is-invalid': enviado && f['nome'].errors }"
+              />
+            </div>
+            <div *ngIf="enviado && f['nome'].errors" class="form-invalid">
               <div *ngIf="f['nome'].errors['required']">
                 Nome é um campo obrigatório.
               </div>
             </div>
           </div>
           <div class="col-sm-4 col-12 mb-3" *ngIf="novoCadastro">
-            <label for="cpf" class="form-label"
-              ><span class="text-danger">*</span> CPF</label
+            <label class="label-element"
+              ><span class="text-danger">*</span> CPF:</label
             >
-            <input 
+            <input
               mask="000.000.000-00"
               type="text"
-              class="form-control"
+              class="input-element form-control"
               id="cpf"
-              placeholder="000.000.000-00"
               formControlName="cpf"
               [ngClass]="{ 'is-invalid': enviado && f['cpf'].errors }"
             />
-            <div *ngIf="enviado && f['cpf'].errors" class="invalid-feedback">
+            <div *ngIf="enviado && f['cpf'].errors" class="form-invalid">
               <div *ngIf="f['cpf'].errors['required']">
                 CPF é um campo obrigatório.
               </div>
-              <div *ngIf="f['cpf'].errors['mask']">
-                Entre com um CPF válido.
-              </div>
+              <div *ngIf="f['cpf'].errors['mask']">Entre com um CPF válido.</div>
             </div>
           </div>
           <div class="col-sm-4 col-12 mb-3" *ngIf="!novoCadastro">
-            <label for="cpf" class="form-label"
-              ><span class="text-danger">*</span> CPF</label
+            <label class="label-element"
+              ><span class="text-danger">*</span> CPF:</label
             >
-            <input *ngIf="cliente"
+            <input
+              *ngIf="cliente"
               disabled
               type="text"
-              class="form-control"
+              class="input-element"
               id="cpf"
-              [(ngModel)]="cliente.cpf" 
+              [(ngModel)]="cliente.cpf"
               #cpf="ngModel"
-              [ngModelOptions]="{standalone: true}"
+              [ngModelOptions]="{ standalone: true }"
               mask="000.000.000-00"
             />
           </div>
         </div>
         <div class="row">
           <div class="col-sm-4 col-12 mb-3">
-            <label for="nascimento" class="form-label"
-              ><span class="text-danger">*</span> Data de Nascimento</label
+            <label class="label-element"
+              ><span class="text-danger">*</span> Data de Nascimento:</label
             >
             <input
               type="date"
-              class="form-control"
+              class="input-element form-control"
               id="nascimento"
-              placeholder="00/00/0000"
               formControlName="data_nasc"
               [max]="dataAtual"
               [ngClass]="{ 'is-invalid': enviado && f['data_nasc'].errors }"
             />
-            <div *ngIf="enviado && f['data_nasc'].errors" class="invalid-feedback">
+            <div *ngIf="enviado && f['data_nasc'].errors" class="form-invalid">
               <div *ngIf="f['data_nasc'].errors['required']">
                 Data de nascimento é um campo obrigatório.
               </div>
@@ -98,39 +94,37 @@
             </div>
           </div>
           <div class="col-sm-4 col-12 mb-3">
-            <label for="renda" class="form-label"
-              ><span class="text-danger">*</span> Renda Mensal</label
+            <label class="label-element"
+              ><span class="text-danger">*</span> Renda Mensal:</label
             >
             <input
-              currencyMask 
+              currencyMask
               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
               type="text"
-              class="form-control text-start"
+              class="form-control text-start input-element"
               id="renda"
-              placeholder="R$ 1.000,00"
               formControlName="renda_mes"
               [ngClass]="{ 'is-invalid': enviado && f['renda_mes'].errors }"
             />
-            <div *ngIf="enviado && f['renda_mes'].errors" class="invalid-feedback">
+            <div *ngIf="enviado && f['renda_mes'].errors" class="form-invalid">
               <div *ngIf="f['renda_mes'].errors['required']">
                 Renda Mensal é um campo obrigatório.
               </div>
             </div>
           </div>
           <div class="col-sm-4 col-12 mb-3">
-            <label for="email" class="form-label"
-              ><span class="text-danger">*</span> E-mail</label
+            <label class="label-element"
+              ><span class="text-danger">*</span> E-mail:</label
             >
             <input
               type="email"
-              class="form-control"
+              class="form-control input-element"
               id="email"
-              placeholder="nome@email.com"
               formControlName="email"
               [ngClass]="{ 'is-invalid': enviado && f['email'].errors }"
               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
             />
-            <div *ngIf="enviado && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="enviado && f['email'].errors" class="form-invalid">
               <div *ngIf="f['email'].errors['required']">
                 E-mail é um campo obrigatório.
               </div>
@@ -140,21 +134,16 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row mt-3">
           <div class="col-12 text-end">
-            <button
-              type="button"
-              class="btn btn-secondary me-2"
-              (click)="voltar()"
-            >
+            <button type="button" class="btn btn-secondary me-2" (click)="voltar()">
               Cancelar
             </button>
             <button type="submit" class="btn btn-primary">Salvar</button>
           </div>
         </div>
-
       </form>
-      <!-- Formulario -->
     </div>
+    <!-- Formulario -->
   </div>
 </div>
