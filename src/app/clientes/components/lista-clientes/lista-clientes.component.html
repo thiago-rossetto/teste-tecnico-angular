@@ -19,7 +19,7 @@
     <!-- /Titulo -->
     <!-- Ordenação e filtro -->
     <form class="row g-3 float-end mb-3 me-3">     
-      <div class="col-auto me-3">
+      <div class="col-auto">
         <div class="form-group mb-3">
           <span class="label-element" id="basic-addon1">Ordenar por:</span>          
           <select #ordenacao class="form-select" id="autoSizingSelect" (change)="ordenarLista(ordenacao.value)">
@@ -122,8 +122,34 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content display-contents">
+          <div class="card">
+            <div class="card-body">
+              <p class="text-center text-dark">
+                Deseja realmente prosseguir com a exclusão do cliente?
+              </p>
+              <div class="text-center pt-2">
+                <button
+                type="button"
+                class="btn btn-secondary me-3"
+                data-bs-dismiss="modal"
+                #closebutton
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="excluirRegistroCliente()"
+                >
+                  Confirmar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">
               Excluir Cliente
@@ -155,7 +181,7 @@
               Confirmar
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- /Modal Exclusao-->
