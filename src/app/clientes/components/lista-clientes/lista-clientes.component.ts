@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FilterPipe } from 'ngx-filter-pipe';
 
 import { Cliente } from '../../models/cliente.model';
 import { ClienteService } from '../../services/cliente.service';
