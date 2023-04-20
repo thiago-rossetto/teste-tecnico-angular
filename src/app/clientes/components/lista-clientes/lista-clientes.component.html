@@ -9,7 +9,7 @@
       <div class="col-sm-4 col-12 text-end ml-20">
         <button
           type="button"
-          class="btn btn-primary"
+          class="btn btn-primary btn-min-w"
           (click)="adicionarCliente()"
         >
           Novo cliente
@@ -93,9 +93,8 @@
               <a
                 type="button"
                 class="m-1"
-                data-bs-toggle="modal"
-                data-bs-target="#modalExclusao"
-                (click)="idExclusao = cliente.id"
+                (click)="abrirDialog(cliente.id)"
+                #dialog
               >
                 Excluir
               </a>
@@ -115,7 +114,13 @@
     </div>
     <!-- /Paginacao -->
     <!-- Modal Exclusao-->
-    <div
+    
+    <!-- <div class="modal-container">
+      <button (click)="openModal()">Delete me</button>
+      <div #dialog></div>
+    </div> -->
+    
+    <!-- <div
       class="modal fade"
       id="modalExclusao"
       tabindex="-1"
@@ -149,41 +154,8 @@
             </div>
           </div>
         </div>
-        <!-- <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
-              Excluir Cliente
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            Deseja realmente prosseguir com a exclusão do cliente?
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-              #closebutton
-            >
-              Cancelar
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              (click)="excluirRegistroCliente()"
-            >
-              Confirmar
-            </button>
-          </div>
-        </div> -->
       </div>
-    </div>
+    </div> -->
     <!-- /Modal Exclusao-->
   </div>
 </div>

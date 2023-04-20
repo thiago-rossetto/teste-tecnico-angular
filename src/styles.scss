@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-$primary: #0a4a5b;
+$primary: #00586F;
 $danger: #E6173E;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
@@ -86,9 +86,12 @@ p {
     height: 40px;
     border-radius: 20px;
     padding: 8px 16px 8px 16px;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 700;
     line-height: 18px;
+}
+.btn-min-w {
+  min-width: 150px;
 }
 .modal-backdrop {
   background-color: #000000;

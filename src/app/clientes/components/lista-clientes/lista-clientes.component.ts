@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Cliente } from '../../models/cliente.model';
 import { ClienteService } from '../../services/cliente.service';
+import { Subscription } from 'rxjs';
+import { DialogService } from 'src/app/shared/dialog/dialog.service';
 
 @Component({
   selector: 'app-lista-clientes',
@@ -20,10 +22,14 @@ export class ListaClientesComponent implements OnInit {
   totalDePaginas: number | null = null;
   pagina: number = 1;
 
+  @ViewChild('dialog', { read: ViewContainerRef }) entry!: ViewContainerRef;
+  sub!: Subscription;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private service: ClienteService
+    private service: ClienteService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -108,15 +114,24 @@ export class ListaClientesComponent implements OnInit {
     this.router.navigate(['alterar-dados-cliente/' + id], { relativeTo: this.route });
   }
 
-  excluirRegistroCliente(): void {
-    if(this.idExclusao) {
-      this.service.excluirCliente(this.idExclusao).subscribe(
-        () => {
-          this.closebutton.nativeElement.click();
-          this.ngOnInit();
-        }
-      )
-    }
+  excluirRegistroCliente(id: number): void {
+    this.service.excluirCliente(id).subscribe(
+      () => {
+        this.ngOnInit();
+      }
+    )
+  }
+
+  abrirDialog(id: number) {
+    this.sub = this.dialogService
+      .open(this.entry, "", 'Deseja realmente prosseguir com a exclusão do cliente?')
+      .subscribe((res: boolean) => {
+        res ? this.excluirRegistroCliente(id) : false;
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.sub) this.sub.unsubscribe();
   }
 
 }
